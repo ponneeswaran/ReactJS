@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>React Tutorial</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script>
+            //Block scope
+            var b = 25;
+            if(true){
+                var b = 75;
+                console.log(b);
+            }
+            console.log(b);
+            
+            //Bringing block scope to Javascript
+            var a = 50;
+            if(true){
+                let a = 100;
+                console.log(a);
+            }
+            console.log(a);
+        </script>
+    </body>
+</html>
