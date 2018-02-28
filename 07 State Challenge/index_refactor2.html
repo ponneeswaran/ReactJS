@@ -11,19 +11,9 @@
         <div id="app"></div>
         <script type="text/babel">
             var StateChangeComponent = React.createClass({
-                add1: function(){
+                addCount: function(value){
                     this.setState({
-                        count: this.state.count+1
-                    })
-                },
-                add5: function(){
-                    this.setState({
-                        count: this.state.count+5
-                    })
-                },
-                add10: function(){
-                    this.setState({
-                        count: this.state.count+10
+                        count: this.state.count+value
                     })
                 },
                 reset: function(){
@@ -36,21 +26,35 @@
                         count: 0
                     }
                 },
+                getDefaultProps: function(){
+                    return {
+                        valueOne: 1,
+                        valueTwo: 5,
+                        valueThree: 10,
+                        text: 'Add'
+                    }
+                },
                 render: function(){
                     return (
                         <div className="container">
                             <h1>Count: {this.state.count}</h1>
-                            <button className="btn blue-btn" onClick={this.add1}>Add 1</button>
-                            <button className="btn green-btn" onClick={this.add5}>Add 5</button>
-                            <button className="btn purple-btn" onClick={this.add10}>Add 10</button>
-                            <button className="btn blue-btn" onClick={this.reset}>Reset</button>
+                            <Button style="btn blue-btn" text={`${this.props.text} ${this.props.valueOne}`} value={this.props.valueOne} clickHandler={this.addCount.bind(this, this.props.valueOne)} />
+                            <Button style="btn green-btn" text={`${this.props.text} ${this.props.valueTwo}`} value={this.props.valueTwo} clickHandler={this.addCount.bind(this, this.props.valueTwo)} />
+                            <Button style="btn purple-btn" text={`${this.props.text} ${this.props.valueThree}`} value={this.props.valueThree} clickHandler={this.addCount.bind(this, this.props.valueThree)} />
+                            <Button style="btn" text="Reset" clickHandler={this.reset} />
                         </div>
                     )
                 }
             });
 
+            var Button = function(props) {
+                return (
+                    <button className={props.style} value={props.value} onClick={props.clickHandler}>{props.text}</button>
+                )
+            };
+
             ReactDOM.render(
-                <StateChangeComponent />,
+                <StateChangeComponent valueOne={1} valueTwo={2} valueThree={3} />,
                 document.getElementById('app')
             );
         </script>
