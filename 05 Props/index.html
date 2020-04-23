@@ -10,10 +10,6 @@
         <div id="app"></div>
         <script type="text/babel">
             var SecondComponent = React.createClass({
-                propTypes: {
-                    name: React.PropTypes.string.isRequired,
-                    location: React.PropTypes.string
-                },
                 getDefaultProps: function(){
                     return {
                         name: "Ponneeswaran",
@@ -31,6 +27,12 @@
                     )
                 }
             });
+
+            SecondComponent.propTypes = {
+                name: React.PropTypes.string.isRequired,
+                location: React.PropTypes.string
+            };
+
             ReactDOM.render(
                 <SecondComponent name="Ponni" location="Santa Clara" />,
                 document.getElementById('app')
