@@ -38,7 +38,7 @@
                     return (
                         <div className="container">
                             <h1>Count: {this.state.count}</h1>
-                            <Button style="btn blue-btn" text={`${this.props.text} ${this.props.valueOne}`} clickHandler={this.addCount.bind(this, this.props.valueOne)} />
+                            <Button style="btn blue-btn" text={this.props.text + ' ' + this.props.valueOne} clickHandler={this.addCount.bind(this, this.props.valueOne)} />
                             <Button style="btn green-btn" text={`${this.props.text} ${this.props.valueTwo}`} clickHandler={this.addCount.bind(this, this.props.valueTwo)} />
                             <Button style="btn purple-btn" text={`${this.props.text} ${this.props.valueThree}`} clickHandler={this.addCount.bind(this, this.props.valueThree)} />
                             <Button style="btn blue-btn" text="Reset" clickHandler={this.reset} />
@@ -47,6 +47,7 @@
                 }
             });
 
+            //Stateless funtional component
             var Button = function(props) {
                 return (
                     <button className={props.style} onClick={props.clickHandler}>{props.text}</button>
