@@ -7,6 +7,15 @@
     <body>
         <div id="app"></div>
         <script>
+            //function Scope
+            var c = 5;
+            function logC(){
+                var c = 10;
+                console.log(c);
+            }
+            logC();
+            console.log(c);
+
             //Block scope
             var b = 25;
             if(true){
