@@ -10,12 +10,13 @@
         <div id="app"></div>
         <script type="text/babel">
             class Counter extends React.Component {
-                //If the constructor is not given then you still have access to `this` variable.
-                //If constructor is used then props should be sent to super
+                //If the constructor is not given then you still have access to `this` variable
+                //If using constructor, best practice is to always use super(props) to avoid confusion
+                //Unlike default props, state is defined inside constructor
                 constructor(props) {
                     super(props); //this allows the use of `this`
                     this.state = { count: 0 };
-                    // this.click = this.click.bind(this); //best practise
+                    this.click = this.click.bind(this); //best practise unless you need to pass value
                 }
                 click(value){
                     console.log(value);
@@ -24,9 +25,12 @@
                     console.log(this);
                     return (
                         <div onClick={() => this.click(10)}>{this.props.text}</div>
+                        // <div onClick={this.click.bind(this, 10)}>{this.props.text}</div>
+                        // <div onClick={this.click}>{this.props.text}</div>
                     )
                 }
             }
+
             //cannot be used inside the class in ES6 but used outside as static variable.
             Counter.defaultProps = { text: "Hello" }
             Counter.propTypes = { text: React.PropTypes.string }
