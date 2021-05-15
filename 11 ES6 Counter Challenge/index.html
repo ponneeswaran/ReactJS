@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>React Tutorial</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="stateChallengeStyling.css">
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+            class StateChangeComponent extends React.Component{
+                constructor(props) {
+                    super(props); 
+                    this.state = { count: 0 };
+                    this.addCount = this.addCount.bind(this); 
+                    this.reset = this.reset.bind(this); 
+                }
+                addCount(value) {
+                    this.setState({
+                        count: this.state.count+value
+                    })
+                }
+                reset() {
+                    this.setState({
+                        count: 0
+                    })
+                }
+                render() {
+                    return (
+                        <div className="container">
+                            <h1>Count: {this.state.count}</h1>
+                            <Button style="btn blue-btn" text={`${this.props.text} ${this.props.valueOne}`} clickHandler={() => this.addCount(this.props.valueOne)} />
+                            <Button style="btn green-btn" text={`${this.props.text} ${this.props.valueTwo}`} clickHandler={() => this.addCount(this.props.valueTwo)} />
+                            <Button style="btn purple-btn" text={`${this.props.text} ${this.props.valueThree}`} clickHandler={() => this.addCount(this.props.valueThree)} />
+                            <Button style="btn blue-btn" text="Reset" clickHandler={this.reset} />
+                        </div>
+                    )
+                }
+            }
+
+            StateChangeComponent.defaultProps = {
+                valueOne: 1,
+                valueTwo: 5,
+                valueThree: 10,
+                text: 'Add'
+            }
+
+            //Stateless funtional component
+            const Button = (props) => {
+                return (
+                    <button className={props.style} onClick={props.clickHandler}>{props.text}</button>
+                )
+            };
+
+            Button.propTypes = {
+                text: React.PropTypes.string,
+                style: React.PropTypes.string,
+                clickHandler: React.PropTypes.func.isRequired
+            }
+
+            ReactDOM.render(
+                <StateChangeComponent valueOne={1} valueTwo={2} valueThree={3} />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>
