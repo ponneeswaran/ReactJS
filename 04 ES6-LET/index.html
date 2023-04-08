@@ -16,7 +16,7 @@
             logC();
             console.log(c);
 
-            //Block scope
+            //Lack of Block scope in Javascript - called Hoisting up
             var b = 25;
             if(true){
                 var b = 75;
@@ -33,6 +33,7 @@
                     a = 45;
                     console.log(a);
                 }
+                console.log(a);
             }
             console.log(a);
         </script>
