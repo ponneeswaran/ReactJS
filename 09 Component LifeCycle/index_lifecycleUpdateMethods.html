@@ -25,20 +25,21 @@
                 getInitialState: function() {
                     return ({
                         popular: false
-                    })
+                    });
                 },
                 // Not called for initial Render
                 componentWillReceiveProps: function(nextProps) {
                     // console.log(nextProps);
                     this.setState({
                         popular: nextProps.likes >= 10
-                    })
+                    });
                 },
                 // Not called for initial Render
                 shouldComponentUpdate: function(nextProps, nextState) {
+                    console.log("ShouldComponentUpdate");
                     console.log(nextProps);
                     console.log(nextState);
-                    return nextProps.likes % 2 === 0;
+                    return nextProps.likes % 2 === 0; //If returns false, the component is not re-rendered 
                 },
                 render: function() {
                     return (
@@ -50,6 +51,7 @@
                 },
                 // Not called for initial Render
                 componentDidUpdate: function(prevProps, prevState){
+                    console.log("componentDidUpdate")
                     console.log(prevProps);
                     console.log(prevState);
                     console.log(ReactDOM.findDOMNode(this));

@@ -58,7 +58,7 @@
                 // After component is rendered
                 componentWillUnmount: function() {
                     console.log("Component is unmounted");
-                    clearInterval(this.interval);
+                    clearInterval(this.interval);  //If we don't clear it will happen even after unmounted and throw an error.
                 }
             });
 
