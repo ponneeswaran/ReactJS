@@ -87,6 +87,7 @@ export default class App extends Component {
           </Col>           */}
         </header>
 
+        {this.state.loaded ? null : "Loading..."}
         <PokemonIndexList 
           display={this.state.loaded}
           options={[10,50,100,200]}
