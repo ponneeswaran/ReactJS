@@ -4,6 +4,7 @@ import './App.css';
 import 'whatwg-fetch';
 import PokeList from './components/PokeList';
 import { Col, Pagination, PageItem } from 'react-bootstrap';
+import SelectItemsPerPageButtons from './components/SelectItemsPerPageButtons';
 
 export default class App extends Component {
   constructor(props){
@@ -18,6 +19,7 @@ export default class App extends Component {
     };
     this.loadPokemon = this.loadPokemon.bind(this);
     this.handlePaginationSelect = this.handlePaginationSelect.bind(this);
+    this.handleLimitChange = this.handleLimitChange.bind(this);
   }
 
   loadPokemon(url) {
@@ -47,6 +49,19 @@ export default class App extends Component {
     console.log(event);
     let offset = this.state.limit * (event.target.text - 1);
     this.loadPokemon(`${this.props.baseURL}/pokemon/?limit=${this.state.limit}&offset=${offset}`);
+    this.setState({
+      activePage: + event.target.innerHTML
+    })
+  }
+
+  handleLimitChange(event) {
+    console.log("event:",event);
+    this.setState({
+      limit: + event.target.innerHTML || this.state.count, 
+      activePage: 1
+    }, ()=> {
+      this.loadPokemon(`${this.props.baseURL}/pokemon/?limit=${this.state.limit}&offset=0`);
+    })
   }
 
   render() {
@@ -64,6 +79,8 @@ export default class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <SelectItemsPerPageButtons options={[10,50,100,200]} selectedValue={this.state.limit} allValue={this.state.count} onOptionsSelected={this.handleLimitChange}/>
+
           <Col sm={8} md={12} smoffset={2} mdoffset={1}>
             <PokeList listofPokemon={this.state.pokemon} />
           </Col>
